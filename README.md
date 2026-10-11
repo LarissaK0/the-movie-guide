@@ -1,4 +1,4 @@
-<h1 align="center"> The Movie Guide <img alt="movie" src="/icon.png" width="70"></h1>
+<h1 align="center"> The Movie Guide <img alt="movie" src="/public/icon.png" width="70"></h1>
 
 <p align="center">
 Projeto criado para busca de filmes.
