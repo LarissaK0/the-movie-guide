@@ -33,6 +33,8 @@ jobs:
 
       - name: Compilar projeto
         run: npm run build
+        env:
+            VITE_TMDB_TOKEN: ${{ secrets.VITE_TMDB_TOKEN }}
 
       - name: Preparar GitHub Pages
         uses: actions/configure-pages@v5

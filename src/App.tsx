@@ -202,11 +202,11 @@ function App() {
   return (
     <main className="app">
     <header className="header">
-  <img
-   src="/icon.png"
+<img
+  src={`${import.meta.env.BASE_URL}icon.png`}
   alt="Logo The Movie Guide"
-   className="icon"
-  />
+  className="icon"
+/>
 
    <a
      className="logo"
