@@ -15,7 +15,7 @@ Projeto criado para busca de filmes.
 
 O The Movie Guide é um projeto desenvolvido com o objetivo de facilitar a descoberta de filmes, permitindo que os usuários explorem títulos por gênero e encontrem novas histórias para assistir.
 
-<p> Você pode acessar o projeto clicando <a href="https://" target="_blank">AQUI</a>! </p>
+<p> Você pode acessar o projeto clicando <a href="https://larissak0.github.io/the-movie-guide/" target="_blank">AQUI</a>! </p>
 
 ## 🚀 Tecnologias
 
