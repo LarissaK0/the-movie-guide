@@ -1,4 +1,4 @@
-
+import Pagination from "@mui/material/Pagination";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
 import { Link } from "react-router-dom";
@@ -90,7 +90,9 @@ function App() {
           );
 
           setMovies(currentMovies);
-
+          setTotalPages(
+  Math.max(targetPage, Math.ceil(matchingMovies.length / 20))
+);
           displayedHasNextPage =
             matchingMovies.length > targetPage * 20;
         } else {
@@ -116,14 +118,16 @@ function App() {
           }
 
           setMovies(data.results);
-          if (!searchTerm.trim() && genreId === null) {
-          setTotalPages(data.total_pages);
-          }
+
+setTotalPages(
+  Math.min(Math.max(data.total_pages, 1), 500)
+);
 
           if (genreId !== null && !searchTerm.trim()) {
             displayedHasNextPage = data.results.length === 20;
           } else {
-            displayedHasNextPage = targetPage < data.total_pages;
+            displayedHasNextPage =
+  targetPage < Math.min(data.total_pages, 500);
           }
         }
 
@@ -349,36 +353,65 @@ function App() {
     </div>
        )}
 
-      {!loading && !error && (page > 1 || hasNextPage) && (
-        <nav
-       className="pagination"
-       aria-label="Paginação dos filmes"
-       >
-      <button
-       className="page-button"
-       type="button"
-       disabled={page === 1 || loading}
-       onClick={() => void handlePageChange(page - 1)}
-       >
-       Anterior
-       </button>
+{!loading && !error && (page > 1 || hasNextPage) && (
+  <nav
+    className="pagination"
+    aria-label="Paginação dos filmes"
+  >
+    <Pagination
+      count={totalPages}
+      page={page}
+      onChange={(_, value) => {
+        void handlePageChange(value);
+      }}
+      disabled={loading}
+      shape="rounded"
+      variant="outlined"
+      size="large"
+      showFirstButton
+      showLastButton
+      siblingCount={1}
+      boundaryCount={1}
+      
+sx={{
+  "& .MuiPaginationItem-root": {
+    color: "#ffffff",
+    borderColor: "#383838",
+    backgroundColor: "#1a0101",
+    borderRadius: "30%",
+    minWidth: "30px",
+    height: "30px",
+    transition: "all 0.25s ease",
+  },
 
-       <span className="page-info">
-       {!query.trim() && selectedGenre === null
-       ? `Página ${page} de ${totalPages}`
-       : `Página ${page}`}
-       </span>
+  "& .MuiPaginationItem-root:hover": {
+    backgroundColor: "#360808",
+    borderColor: "#00e054",
+  },
 
-       <button
-       className="page-button"
-       type="button"
-       disabled={!hasNextPage || loading}
-       onClick={() => void handlePageChange(page + 1)}
-       >
-         Próxima
-        </button>
-        </nav>
-       )}
+  "& .MuiPaginationItem-root.Mui-selected": {
+    backgroundColor: "#00e054",
+    color: "#0b0b0b",
+    borderColor: "#00e054",
+    fontWeight: 600,
+  },
+
+  "& .MuiPaginationItem-root.Mui-selected:hover": {
+    backgroundColor: "#00c94a",
+  },
+
+  "& .MuiPaginationItem-root.Mui-disabled": {
+    color: "#666666",
+    borderColor: "#383434",
+    
+  },
+  
+
+}}
+
+    />
+  </nav>
+)}
      </section>
     </main>
   );
